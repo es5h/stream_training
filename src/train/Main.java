@@ -10,17 +10,12 @@ public class Main {
         return number.length() - number.replaceAll("3","").replaceAll("6","").replaceAll("9","").length();
     }
 
-    private static String isClapped(Integer num){
-        String number = num.toString();
-
-        if(number.contains("3") || number.contains("6") || number.contains("9") )
-            return new String(new char[count(number)]).replace("\0", "짝");
-
-        return number;
-    }
+    private static String isClapped(String number){
+        return count(number)>0? new String(new char[count(number)]).replace("\0", "짝"): number;
+    } 
 
     public static void main(String[] args) {
-        List<String> list = IntStream.range(1, 334).mapToObj(Main::isClapped).collect(Collectors.toList());
+        List<String> list = IntStream.range(1, 334).mapToObj(x->isClapped(String.valueOf(x))).collect(Collectors.toList());
         System.out.println(list);
     }
 }
